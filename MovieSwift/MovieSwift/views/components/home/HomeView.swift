@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUIFlux
 // Elastic Modification : import module
 import ElasticApm
+import MetricKit
 // End Elastic Modification
 
 // MARK:- Shared View
@@ -20,6 +21,7 @@ let store = Store<AppState>(reducer: appStateReducer,
 // Elastic Modification : Setup the configuration of the iOS Elastic Agent APM
 class AppDelegate : NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Elastic APM
         if let serverURLString = Bundle.main.object(forInfoDictionaryKey: "APM_SERVER_URL") as? String, let secretToken = Bundle.main.object(forInfoDictionaryKey: "APM_TOKEN") as? String {
             if let serverURL = URL(string: serverURLString) {
                 let config = AgentConfigBuilder()
@@ -30,6 +32,11 @@ class AppDelegate : NSObject, UIApplicationDelegate {
                 ElasticApmAgent.start(with: config)
             }
         }
+        // End Elastic APM
+        // MetricKit implementation
+        let metricManager = MXMetricManager.shared
+        metricManager.add(self)
+        // End MetricKit implementation
         return true
     }
 }
@@ -164,3 +171,16 @@ let sampleStore = Store<AppState>(reducer: appStateReducer,
                                                                              peoplesMovies: [:],
                                                                              search: [:])))
 #endif
+
+// Fred modif
+extension AppDelegate: MXMetricManagerSubscriber {
+  func didReceive(_ payloads: [MXMetricPayload]) {
+    guard let firstPayload = payloads.first else { return }
+    print(firstPayload.dictionaryRepresentation())
+  }
+
+  func didReceive(_ payloads: [MXDiagnosticPayload]) {
+    guard let firstPayload = payloads.first else { return }
+    print(firstPayload.dictionaryRepresentation())
+  }
+}
