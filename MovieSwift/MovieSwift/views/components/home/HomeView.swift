@@ -8,15 +8,37 @@
 
 import SwiftUI
 import SwiftUIFlux
+// Elastic Modification : import module
+import ElasticApm
+// End Elastic Modification
 
 // MARK:- Shared View
 
 let store = Store<AppState>(reducer: appStateReducer,
                             middleware: [loggingMiddleware],
                             state: AppState())
-
+// Elastic Modification : Setup the configuration of the iOS Elastic Agent APM
+class AppDelegate : NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        if let serverURLString = Bundle.main.object(forInfoDictionaryKey: "APM_SERVER_URL") as? String, let secretToken = Bundle.main.object(forInfoDictionaryKey: "APM_TOKEN") as? String {
+            if let serverURL = URL(string: serverURLString) {
+                let config = AgentConfigBuilder()
+                    .withServerUrl(serverURL)
+                    .withSecretToken(secretToken)
+                    .build()
+                    
+                ElasticApmAgent.start(with: config)
+            }
+        }
+        return true
+    }
+}
+// End Elastic Modification
 @main
 struct HomeView: App {
+    // Elastic Modification : Load the Agent
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    // End Elastic Modification
     let archiveTimer: Timer
     
     init() {

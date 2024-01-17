@@ -14,8 +14,18 @@ let package = Package(
     products: [
         .library(name: "UI", targets: ["UI"]),
     ],
+    dependencies:[
+        .package(
+            url: "https://github.com/elastic/apm-agent-ios.git",
+            from: "1.0.0"),
+    ],
     targets: [
-        .target(name: "UI", dependencies: [], path: "Sources")
+        .target(
+            name: "UI",
+            dependencies: [
+                .product(name: "ElasticApm", package: "apm-agent-ios")
+            ],
+            path: "Sources")
     ],
     swiftLanguageVersions: [
         .version("5.2")
