@@ -19,6 +19,9 @@ struct FanClubHome: ConnectedView {
     @State private var currentPage = 1
     
     func map(state: AppState , dispatch: @escaping DispatchFunction) -> Props {
+        // Elastic Modification : Crach the application on click   
+        fatalError("A Crash!")  
+        // End Elastic Modification
         Props(peoples: state.peoplesState.fanClub.map{ $0 }.sorted(),
               popular: state.peoplesState.popular
                 .filter{ !state.peoplesState.fanClub.contains($0) }
