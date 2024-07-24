@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/elastic/apm-agent-ios.git",
         "state": {
           "branch": null,
-          "revision": "d0f1a181c906c5d01793b6386e5df832ef6765a9",
-          "version": "1.0.0"
+          "revision": "9909b26b5ac9b99f00e15f897aa59ae221e590e4",
+          "version": "1.0.2"
         }
       },
       {
@@ -17,6 +17,15 @@
           "branch": null,
           "revision": "6ade19f0b57f5fc436dfecfced83f3c84d1095b9",
           "version": "1.21.0"
+        }
+      },
+      {
+        "package": "Kronos",
+        "repositoryURL": "https://github.com/MobileNativeFoundation/Kronos.git",
+        "state": {
+          "branch": null,
+          "revision": "f331821314f9b35867a18c5c8fc2f918536d79ac",
+          "version": "4.3.1"
         }
       },
       {
@@ -51,8 +60,8 @@
         "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
         "state": {
           "branch": null,
-          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-          "version": "5.1.0"
+          "revision": "7cbd73f46a7dfaeca079e18df7324c6de6d1834a",
+          "version": "5.2.3"
         }
       },
       {
@@ -170,15 +179,6 @@
           "branch": null,
           "revision": "18ff09e6b30e589ed38f90a1af23e193b8ecef8e",
           "version": "1.1.2"
-        }
-      },
-      {
-        "package": "TrueTime",
-        "repositoryURL": "https://github.com/elastic/TrueTime.swift.git",
-        "state": {
-          "branch": null,
-          "revision": "271dc975dd0a8ce66d1184450b30c4e8734ea998",
-          "version": "1.0.0"
         }
       }
     ]
