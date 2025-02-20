@@ -17,7 +17,7 @@ let package = Package(
     dependencies:[
         .package(
             url: "https://github.com/elastic/apm-agent-ios.git",
-            from: "1.0.2"),
+            from: "1.2.0"),
     ],
     targets: [
         .target(
