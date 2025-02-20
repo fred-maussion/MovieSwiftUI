@@ -26,7 +26,7 @@ class AppDelegate : NSObject, UIApplicationDelegate {
             if let serverURL = URL(string: serverURLString) {
                 let config = AgentConfigBuilder()
                     .withServerUrl(serverURL)
-                    .withSecretToken(secretToken)
+                    .withApiKey(secretToken)
                     .build()
                     
                 ElasticApmAgent.start(with: config)
