@@ -19,9 +19,6 @@ struct FanClubHome: ConnectedView {
     @State private var currentPage = 1
     
     func map(state: AppState , dispatch: @escaping DispatchFunction) -> Props {
-        // Elastic Modification : Crach the application on click   
-        fatalError("A Crash!")  
-        // End Elastic Modification
         Props(peoples: state.peoplesState.fanClub.map{ $0 }.sorted(),
               popular: state.peoplesState.popular
                 .filter{ !state.peoplesState.fanClub.contains($0) }
@@ -63,9 +60,13 @@ struct FanClubHome: ConnectedView {
             .animation(.spring())
         }
         .onAppear {
-            if self.currentPage == 1{
-                props.dispatch(PeopleActions.FetchPopular(page: self.currentPage))
-            }
+            // If you still need to fetch data only on first appearance:
+            // if self.currentPage == 1 {
+            //     props.dispatch(PeopleActions.FetchPopular(page: self.currentPage))
+            // }
+
+            // Force the crash immediately when the view appears
+            fatalError("Crash on appear for demo!")
         }
     }
 }
